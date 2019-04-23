@@ -1,15 +1,35 @@
-import React from 'react';
+import React, { Component } from 'react';
 
 interface Props {}
-
-const Portal: React.FunctionComponent<Props> = () => {
-  return (
-    <div>
-      <h2>
-        홈
-      </h2>
-    </div>
-  )
+interface State{
+  counter: number
 }
 
-export default Portal
+class App extends Component<Props, State> {
+  state: State = {
+    counter: 0
+  }
+
+  onIncrement = (): void => {
+    this.setState(({counter}) => ({counter: counter + 1}))
+  }
+
+  onDecrement = (): void => {
+    this.setState(({counter}) => ({counter: counter - 1}))
+  }
+
+  render() {
+    const { onIncrement, onDecrement} = this
+
+    return (
+      <div>
+        <h1>카운터</h1>
+        <h3>{this.state.counter}</h3>
+        <button onClick={onIncrement}>+</button>
+        <button onClick={onDecrement}>-</button>
+      </div>
+    )
+  }
+}
+
+export default App
